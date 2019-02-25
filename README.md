@@ -108,6 +108,7 @@ Client Side
 		Method 
 		public void SearchQuery(View view) : Get the query from user and called Result GUI
 ![](https://github.com/BhaskarTrivedi/QuerySearch_Recommentation_Classification/blob/master/Img/Search_Query.JPG)
+	
 	class SearchResult: Created to show search result based on user query.
 
 	Method 
