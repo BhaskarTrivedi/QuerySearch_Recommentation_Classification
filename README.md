@@ -88,13 +88,11 @@ Client Side
 
 		private void ReadReceivedJson() : Convert received data stream to JSON Object and called appropriate object based on Action ( Search Query, Recommendation System, classification)
 
+	class MainActivity : Create login screen for user
 
-	class SearchActivity : Created to get Search query from user
-
-		Method 
-		public void SearchQuery(View view) : Get the query from user and called Result GUI
-![](https://github.com/BhaskarTrivedi/QuerySearch_Recommentation_Classification/blob/master/Img/Search_Query.JPG)
- 
+	Method
+	public void onClick: check for valid user
+![](https://github.com/BhaskarTrivedi/QuerySearch_Recommentation_Classification/blob/master/Img/Client_Login.JPG)
 
 
 	class Home: Created to perform different action, right now support added only for search
@@ -105,12 +103,11 @@ Client Side
 ![](https://github.com/BhaskarTrivedi/QuerySearch_Recommentation_Classification/blob/master/Img/Home.JPG)
  
 
-	class MainActivity : Create login screen for user
+	class SearchActivity : Created to get Search query from user
 
-	Method
-	public void onClick: check for valid user
-![](https://github.com/BhaskarTrivedi/QuerySearch_Recommentation_Classification/blob/master/Img/Client_Login.JPG)
-
+		Method 
+		public void SearchQuery(View view) : Get the query from user and called Result GUI
+![](https://github.com/BhaskarTrivedi/QuerySearch_Recommentation_Classification/blob/master/Img/Search_Query.JPG)
 	class SearchResult: Created to show search result based on user query.
 
 	Method 
