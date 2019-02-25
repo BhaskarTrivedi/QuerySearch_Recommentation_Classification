@@ -130,7 +130,7 @@ Environment
 
 Reference:
 
-https://github.com/mnielsen/VSM/blob/master/vsm.py
+https://github.com/mnielsen/VSM/blob/master/vsm.py</br>
 http://blog.josephwilk.net/projects/building-a-vector-space-search-engine-in-python.html
 
 Credit
