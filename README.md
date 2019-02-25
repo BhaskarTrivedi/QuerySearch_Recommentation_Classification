@@ -124,6 +124,11 @@ Environment
 	simplejson      3.16.0
 
 
+Reference:
+
+https://github.com/mnielsen/VSM/blob/master/vsm.py
+http://blog.josephwilk.net/projects/building-a-vector-space-search-engine-in-python.html
+
 Credit
 
 Dataset Kaggle Moviedata : https://www.kaggle.com/rounakbanik/the-movies-dataset#movies_metadata.csv 
