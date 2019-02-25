@@ -102,21 +102,21 @@ Client Side
 		Method 
 		public void SearchQuery(View view) : Navigate to Search query selection on search action
 		
-		![](https://github.com/BhaskarTrivedi/QuerySearch_Recommentation_Classification/blob/master/Img/Home.JPG)
+![](https://github.com/BhaskarTrivedi/QuerySearch_Recommentation_Classification/blob/master/Img/Home.JPG)
  
 
 	class MainActivity : Create login screen for user
 
 	Method
 	public void onClick: check for valid user
-	![](https://github.com/BhaskarTrivedi/QuerySearch_Recommentation_Classification/blob/master/Img/Client_Login.JPG)
+![](https://github.com/BhaskarTrivedi/QuerySearch_Recommentation_Classification/blob/master/Img/Client_Login.JPG)
 
 	class SearchResult: Created to show search result based on user query.
 
 	Method 
 	public void DisplayQueryResult : Show query result in GUI
 	
-	![](https://github.com/BhaskarTrivedi/QuerySearch_Recommentation_Classification/blob/master/Img/Search_Result.JPG)
+![](https://github.com/BhaskarTrivedi/QuerySearch_Recommentation_Classification/blob/master/Img/Search_Result.JPG)
 	
 
 Environment
