@@ -111,3 +111,17 @@ Client Side
 
 	Method 
 	public void DisplayQueryResult : Show query result in GUI
+	
+
+Environment
+	Python : 3.6.2
+	Windows : 10
+	Flask           1.0.2
+	nltk            3.4
+	numpy           1.16.1
+	pandas          0.24.1
+	simplejson      3.16.0
+
+
+Credit 
+Dataset Kaggle Moviedata : https://www.kaggle.com/rounakbanik/the-movies-dataset#movies_metadata.csv 
