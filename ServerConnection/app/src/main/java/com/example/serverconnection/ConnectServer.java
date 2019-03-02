@@ -25,7 +25,9 @@ public class ConnectServer {
     //reason for 10.0.2.2 is https://developer.android.com/studio/run/emulator-networking
     SearchResult SearchResultObj;
     int Action = 0;
-    String SearchURL = "http://10.0.2.2:5000/search/";
+    //String SearchURL = "http://10.0.2.2:5000/search/";
+    String SearchURL = "http://bhaskartrivedi.pythonanywhere.com/search/";
+    String Searchurl = "http://bhaskartrivedi.pythonanywhere.com/search/";
     JSONObject searchResponse;
     //String SearchURL = "http://stackoverflow.com";
     String SearchData;
@@ -58,7 +60,7 @@ public class ConnectServer {
         this.Action = Act;
         Log.d("SearchQuery ", data);
         if (Action == 0) {
-            SearchURL = "http://10.0.2.2:5000/search/";
+            SearchURL = Searchurl;
             this.SearchResultObj = SearchResultObj;
         }
         new HTTPAsyncTask().execute(SearchURL);

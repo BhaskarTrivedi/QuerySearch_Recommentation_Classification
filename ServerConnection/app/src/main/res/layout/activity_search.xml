@@ -8,9 +8,9 @@
 
     <EditText
         android:id="@+id/edTextSearchAct"
-        android:layout_width="333dp"
+        android:layout_width="271dp"
         android:layout_height="100dp"
-        android:layout_marginStart="34dp"
+        android:layout_marginStart="44dp"
         android:layout_marginTop="61dp"
         android:layout_marginEnd="44dp"
         android:layout_marginBottom="33dp"
