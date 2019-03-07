@@ -1,8 +1,8 @@
 PythonAnywhere can be used with python flask to add domain support for you online application and server creation. 
 Using PythonAnywhere is very easy to add backend support for you application.
 
-If you are student and don't want pay money but want to explore how it work tgen don't worry. PythonAnywhere provide free account with 
-limited access. You joust need to create a beginner account .
+If you are student and don't want pay money but want to explore how it work then don't worry. PythonAnywhere provide free account with 
+limited access. You just need to create a beginner account .
 https://www.pythonanywhere.com/pricing/ 
 
 Create a beginner account. Once account is created click on web app and create application with flask with your required python version.
