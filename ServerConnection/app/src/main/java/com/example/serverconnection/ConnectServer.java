@@ -24,13 +24,17 @@ public class ConnectServer {
 
     //reason for 10.0.2.2 is https://developer.android.com/studio/run/emulator-networking
     SearchResult SearchResultObj;
+    ClassificationActivity ClassificationActObj;
     int Action = 0;
     //String SearchURL = "http://10.0.2.2:5000/search/";
-    String SearchURL = "http://bhaskartrivedi.pythonanywhere.com/search/";
+    //String classificationURL = "http://10.0.2.2:5000/classification/";
+    String classificationURL = "http://bhaskartrivedi.pythonanywhere.com/classification/";
+    String DomailURL = "http://bhaskartrivedi.pythonanywhere.com/search/";
     String Searchurl = "http://bhaskartrivedi.pythonanywhere.com/search/";
-    JSONObject searchResponse;
+    JSONObject rcvResponse;
     //String SearchURL = "http://stackoverflow.com";
     String SearchData;
+    String classificationData;
     InputStream searchin;
     String fullresponse;
     private class HTTPAsyncTask extends AsyncTask<String, Void, String> {
@@ -60,11 +64,23 @@ public class ConnectServer {
         this.Action = Act;
         Log.d("SearchQuery ", data);
         if (Action == 0) {
-            SearchURL = Searchurl;
+            DomailURL = Searchurl;
             this.SearchResultObj = SearchResultObj;
         }
-        new HTTPAsyncTask().execute(SearchURL);
+        new HTTPAsyncTask().execute(DomailURL);
     }
+
+    public void SendClassificationData(String data,int Act,ClassificationActivity ClassResultObj){
+        classificationData = data;
+        this.Action = Act;
+        Log.d("CLassification ", data);
+        if (Action == 1) {
+            DomailURL = classificationURL;
+            this.ClassificationActObj = ClassResultObj;
+        }
+        new HTTPAsyncTask().execute(DomailURL);
+    }
+
 
     private String getResponseFromServer(String targetUrl){
         try {
@@ -79,6 +95,10 @@ public class ConnectServer {
             if(Action ==0){
                 //Creating content to sent to server
                 jsonObject = CreateSearchJson();
+            }
+            if(Action ==1){
+                //Creating content to sent to server
+                jsonObject = CreateClassificationJson();
             }
             else {
                 jsonObject = CreateSearchJson();
@@ -110,6 +130,18 @@ public class ConnectServer {
         return null;
     }
 
+    private JSONObject CreateClassificationJson() {
+
+        JSONObject jsonsearchObject = new JSONObject();
+        try{
+            jsonsearchObject.put("classificatipnString",classificationData);
+            return jsonsearchObject;
+        }catch (JSONException e){
+            Log.d("JCF","Can't format JSON OBject class: Connect servet Method : CreateSearchJson");
+        }
+        return null;
+    }
+
     private void CreateDatatoSend(HttpURLConnection urlConnection,JSONObject JObject){
         try {
             urlConnection.setDoOutput(true);
@@ -124,7 +156,7 @@ public class ConnectServer {
             os.close();
         } catch (IOException e) {
             Log.d("JCF","set Post failed CreateDatatoSend");
-        }
+}
 
     }
 
@@ -149,9 +181,12 @@ public class ConnectServer {
     private void ReadReceivedJson(){
         Log.d("Full Received", fullresponse );
         try {
-            searchResponse = new JSONObject(fullresponse);
+            rcvResponse = new JSONObject(fullresponse);
             if (Action == 0){
-                SearchResultObj.ReceivedQueryResult(searchResponse);
+                SearchResultObj.ReceivedQueryResult(rcvResponse);
+            }
+            if (Action == 1){
+                ClassificationActObj.ReceivedQueryResult(rcvResponse);
             }
         } catch (JSONException e) {
             Log.d("Received Joson Exp", e.toString());

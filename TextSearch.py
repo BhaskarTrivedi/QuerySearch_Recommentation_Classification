@@ -1,12 +1,24 @@
 import CFileRead as fr
 import CTextSearch as ts
 from collections import defaultdict
+import CClassification as clf
 
 
 def TextSearch():
 
     SearchObj = ts.CTextSearch()
-    #SearchObj.
+    FileHandlingObj = SearchObj.getFileReadObj()
+    ClassObj = clf.CClassification()
+    ClassObj.setFileReadObj(FileHandlingObj)
+    ClassObj.Initialize()
+    ClassObj.CreateTraingData()
+    ClassObj.TrainingClassification()
+    [data,actual_label,index] = ClassObj.getTestData()
+    print(data)
+    print(actual_label)
+    PredictedClass = ClassObj.PredictedClass(data,index)
+    print(PredictedClass)
+
 
 
 

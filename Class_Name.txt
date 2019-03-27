@@ -1,0 +1,9 @@
+1: Fantacy
+2 : Comedy
+3: Family 
+4: Romance
+5: sci-fi
+6: History
+7: Drama
+8: Adventure
+9: Thriller

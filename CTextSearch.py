@@ -39,7 +39,7 @@ class CTextSearch:
     #shpuld be called and initialize when server start
     def Read_and_initialise_document(self):
         [self.totalDocument,TotalDimension]  = self.MovieData.shape
-        self.totalDocument = 2000 #need to comment only for debuging
+        self.totalDocument = 200 #need to comment only for debuging
         for index in range(self.totalDocument):
             terms = self.tokenize(self.MovieData.loc[index, 'overview'])
             self.length.append(len(terms))
@@ -141,6 +141,9 @@ class CTextSearch:
             return math.log(self.totalDocument/self.docF[term],2)
         else:
             return 0
+
+    def getFileReadObj(self):
+        return self.FileHandlingObj
 
     #added for debuging purpose
     def DisplayData(self):

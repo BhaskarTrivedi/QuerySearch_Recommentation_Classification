@@ -30,12 +30,27 @@
         android:layout_marginStart="163dp"
         android:layout_marginTop="105dp"
         android:layout_marginEnd="160dp"
-        android:layout_marginBottom="597dp"
+        android:layout_marginBottom="28dp"
         android:onClick="SearchQuery"
         android:text="Search"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/BtnClassificationHome"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Home_TextView" />
+
+    <Button
+        android:id="@+id/BtnClassificationHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="163dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="160dp"
+        android:layout_marginBottom="394dp"
+        android:onClick="Classification"
+        android:text="Classification"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BtnSearchHome" />
 </android.support.constraint.ConstraintLayout>

@@ -27,4 +27,14 @@ public class Home extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void Classification(View view){
+        Context context = getApplicationContext();
+        CharSequence text = "Classification Selected";
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+        Intent intent = new Intent(this, ClassificationActivity.class);
+        startActivity(intent);
+    }
+
 }
