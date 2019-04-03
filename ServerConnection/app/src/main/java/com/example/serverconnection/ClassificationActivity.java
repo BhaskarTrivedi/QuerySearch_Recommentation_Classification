@@ -3,6 +3,8 @@ package com.example.serverconnection;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -10,36 +12,23 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ClassificationActivity extends AppCompatActivity {
-
     private ConnectServer cntsvr;
-    private int DisplayCpacity;
-
     private TextView[] textViewMovie;
-    private TextView[] textViewMovieClsf;
-
+    private TextView[] textViewMovieProb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_classification);
 
         cntsvr = new ConnectServer();
-        DisplayCpacity = 3;
-        textViewMovie = new TextView[DisplayCpacity];
-        textViewMovieClsf = new TextView[DisplayCpacity];
-        // Get the Intent that started this activity and extract the string
-        textViewMovie[0] = findViewById(R.id.editTextMovie1);
-        textViewMovie[1] = findViewById(R.id.editTextmovie2);
-        textViewMovie[2] = findViewById(R.id.editTextmovie3);
-        textViewMovieClsf[0] = findViewById(R.id.editTextclassification1);
-        textViewMovieClsf[1] = findViewById(R.id.editTextclassification2);
-        textViewMovieClsf[2] = findViewById(R.id.editTextclassification3);
-
-        sendQuery();
+        textViewMovie = new TextView[1];
+        textViewMovieProb = new TextView[1];
+        textViewMovie[0] = findViewById(R.id.editTextClass);
+        textViewMovieProb[0] = findViewById(R.id.editTextProbablity);
     }
 
-    public void sendQuery() {
-        cntsvr.SendClassificationData("Classification Action",1,this);
+    public void sendQuery(String query) {
+        cntsvr.SendClassificationData(query,1,this);
     }
 
     public void ReceivedQueryResult(JSONObject ReceivedJSonObj){
@@ -47,30 +36,34 @@ public class ClassificationActivity extends AppCompatActivity {
     }
 
     public void DisplayQueryResult(JSONObject ReceivedJSonObj){
-        try {
+        try{
             JSONArray arrJsonMovie = ReceivedJSonObj.getJSONArray("Movie");
             String Moviearr[] = new String[arrJsonMovie.length()];
 
-            JSONArray arrJsonMovDes = ReceivedJSonObj.getJSONArray("Class");
-            String MovieClsarr[] = new String[arrJsonMovDes.length()];
-            int totalResult = arrJsonMovie.length();
-            int loopcount = totalResult;
-            if (totalResult > DisplayCpacity){
-                loopcount = DisplayCpacity;
-            }
+            JSONArray arrJsonMovDes = ReceivedJSonObj.getJSONArray("Prabablity");
+            String MovieProbablity[] = new String[arrJsonMovDes.length()];
 
-            //textViewMovie1.setText(message);
-            for(int i = 0; i < loopcount; i++) {
+            int totalResult = arrJsonMovie.length();
+            for(int i = 0; i < totalResult; i++) {
                 Moviearr[i] = arrJsonMovie.getString(i);
-                MovieClsarr[i] = arrJsonMovDes.getString(i);
+                MovieProbablity[i] = arrJsonMovDes.getString(i);
                 Log.d("Movie", Moviearr[i]);
-                Log.d("Classification", MovieClsarr[i]);
+                Log.d("Prapablity", MovieProbablity[i]);
                 textViewMovie[i].setText(Moviearr[i]);
-                textViewMovieClsf[i].setText(MovieClsarr[i]);
+                textViewMovieProb[i].setText(MovieProbablity[i]);
                 //HighlightQueryTerm(textViewMoviedes[i]);
             }
-        } catch (JSONException e) {
+
+        }catch (JSONException e) {
             Log.d("No Movie", "check code " );
         }
+
     }
+
+    public void ClassificationQuery(View view){
+        EditText editText = (EditText) findViewById(R.id.editTextQuery);
+        String message = editText.getText().toString();
+        sendQuery(message);
+    }
+
 }

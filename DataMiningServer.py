@@ -1,13 +1,13 @@
 from flask import Flask, request,jsonify
 import CTextSearch as ts
-import CClassification as clf
+import CNaiveBayes as nb
 
 
 app = Flask(__name__)
 
 SearchObj = ts.CTextSearch()
 FileHandlingObj = SearchObj.getFileReadObj()
-ClassificationObj = clf.CClassification()
+naivebObj = nb.CNaivebase()
 
 
 @app.route('/')
@@ -37,7 +37,7 @@ def classificationdata():
     if 'classification' in req_data:
         searchQ = req_data['classification']
 
-    ResultData = ClassificationT()
+    ResultData = ClassificationT(searchQ)
     if ResultData == []:
         ResultData = {"Movie": ["NA", "NA", "NA", "NA", "NA"],
                       "Class": ["NA", "NA", "NA", "NA", "NA"]}
@@ -55,22 +55,19 @@ def InitialiseSearchObject():
 
 def InitializeClassificationObject():
     print("Initialising Classification Object")
-    ClassificationObj.setFileReadObj(FileHandlingObj)
-    ClassificationObj.Initialize()
-    ClassificationObj.CreateTraingData()
-    ClassificationObj.TrainingClassification()
+    naivebObj.setFileReadObj(FileHandlingObj)
+    naivebObj.Initialize()
+    naivebObj.CalculateClassProbability()
     print("Classification Initialise")
 
 def SearchQuery(query):
     print("Inside Search Query Server: DataMiningServer.py")
     return SearchObj.Search(query)
 
-def ClassificationT():
+def ClassificationT(query):
     print("Inside ClassificationT Server: DataMiningServer.py")
-    [data, actual_label, index] = ClassificationObj.getTestData()
-    #print(data)
-    print(actual_label)
-    PredictedClass = ClassificationObj.PredictedClass(data, index)
+    PredictedClass = naivebObj.CalculateTermProbablity(query)
+    print(PredictedClass)
     return PredictedClass
 
 

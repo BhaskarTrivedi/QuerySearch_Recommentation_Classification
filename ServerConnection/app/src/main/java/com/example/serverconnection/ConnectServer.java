@@ -73,7 +73,7 @@ public class ConnectServer {
     public void SendClassificationData(String data,int Act,ClassificationActivity ClassResultObj){
         classificationData = data;
         this.Action = Act;
-        Log.d("CLassification ", data);
+        Log.d("Classification ", data);
         if (Action == 1) {
             DomailURL = classificationURL;
             this.ClassificationActObj = ClassResultObj;
@@ -134,7 +134,7 @@ public class ConnectServer {
 
         JSONObject jsonsearchObject = new JSONObject();
         try{
-            jsonsearchObject.put("classificatipnString",classificationData);
+            jsonsearchObject.put("classification",classificationData);
             return jsonsearchObject;
         }catch (JSONException e){
             Log.d("JCF","Can't format JSON OBject class: Connect servet Method : CreateSearchJson");
