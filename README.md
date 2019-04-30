@@ -115,6 +115,19 @@ Client Side
 	public void DisplayQueryResult : Show query result in GUI
 	
 ![](https://github.com/BhaskarTrivedi/QuerySearch_Recommentation_Classification/blob/master/Img/Search_Result.jpg)
+
+	class ClassificationActivity :  Created to get query class 
+	
+	Method 
+	public void DisplayQueryResult: Show classification result
+	
+![](https://github.com/BhaskarTrivedi/QuerySearch_Recommentation_Classification/blob/master/Img/Classification.JPG)
+
+	class Recommendation :  Created to recommended movie to the user
+	
+	Method
+	public void DisplayQueryResult : Show recommendation result to GUI
+
 	
 
 Environment
