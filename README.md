@@ -100,21 +100,21 @@ Client Side
 		Method 
 		public void SearchQuery(View view) : Navigate to Search query selection on search action
 		
-![](https://github.com/BhaskarTrivedi/QuerySearch_Recommentation_Classification/blob/master/Img/Home.JPG)
+![](https://github.com/BhaskarTrivedi/QuerySearch_Recommentation_Classification/blob/master/Img/Home.jpg)
  
 
 	class SearchActivity : Created to get Search query from user
 
 		Method 
 		public void SearchQuery(View view) : Get the query from user and called Result GUI
-![](https://github.com/BhaskarTrivedi/QuerySearch_Recommentation_Classification/blob/master/Img/Search_Query.JPG)
+![](https://github.com/BhaskarTrivedi/QuerySearch_Recommentation_Classification/blob/master/Img/Search_Query.jpg)
 	
 	class SearchResult: Created to show search result based on user query.
 
 	Method 
 	public void DisplayQueryResult : Show query result in GUI
 	
-![](https://github.com/BhaskarTrivedi/QuerySearch_Recommentation_Classification/blob/master/Img/Search_Result.JPG)
+![](https://github.com/BhaskarTrivedi/QuerySearch_Recommentation_Classification/blob/master/Img/Search_Result.jpg)
 	
 
 Environment
