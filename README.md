@@ -128,7 +128,7 @@ Client Side
 	Method
 	public void DisplayQueryResult : Show recommendation result to GUI
 
-	
+![](https://github.com/BhaskarTrivedi/QuerySearch_Recommentation_Classification/blob/master/Img/Recommendation.JPG)
 
 Environment
 
