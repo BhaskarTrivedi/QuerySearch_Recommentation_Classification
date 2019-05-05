@@ -21,8 +21,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mLogin = findViewById(R.id.Main_Login_Buttonid);
-        usrNameEditText = findViewById(R.id.UserName_PlainTextID);
-        passwordEditText = findViewById(R.id.Password_PainTextId);
+        //usrNameEditText = findViewById(R.id.UserName_PlainTextID);
+        //passwordEditText = findViewById(R.id.Password_PainTextId);
         usr = new UserInfo();
         //cntsvr = new ConnectServer();
     }
@@ -32,24 +32,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     {
         switch (view.getId()) {
             case R.id.Main_Login_Buttonid:
-                String usrName = usrNameEditText.getText().toString();
-                String password = passwordEditText.getText().toString();
-                boolean usrN = usr.checkUser(usrName);
-                boolean psd = usr.checkPassword(password);
+                //String usrName = usrNameEditText.getText().toString();
+                //String password = passwordEditText.getText().toString();
+                //boolean usrN = usr.checkUser(usrName);
+                //boolean psd = usr.checkPassword(password);
                 //cntsvr.SendSearchData("Woody  happily");
                 // Do something
 
-                if(usrN && psd){
-                    Intent intent = new Intent(this, Home.class);
-                    startActivity(intent);
-                }
-                else {
-                    Context context = getApplicationContext();
-                    CharSequence text = "User Name or Password is wrong";
-                    int duration = Toast.LENGTH_SHORT;
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
-                }
+
+                Intent intent = new Intent(this, Home.class);
+                startActivity(intent);
+
+
         }
     }
 }

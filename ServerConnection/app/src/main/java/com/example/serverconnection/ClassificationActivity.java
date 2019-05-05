@@ -15,16 +15,21 @@ public class ClassificationActivity extends AppCompatActivity {
     private ConnectServer cntsvr;
     private TextView[] textViewMovie;
     private TextView[] textViewMovieProb;
+    private int DisplayCpacity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_classification);
-
+        DisplayCpacity = 3;
         cntsvr = new ConnectServer();
-        textViewMovie = new TextView[1];
-        textViewMovieProb = new TextView[1];
-        textViewMovie[0] = findViewById(R.id.editTextClass);
-        textViewMovieProb[0] = findViewById(R.id.editTextProbablity);
+        textViewMovie = new TextView[DisplayCpacity];;
+        textViewMovieProb = new TextView[DisplayCpacity];;
+        textViewMovie[0] = findViewById(R.id.editTextMovie1);
+        textViewMovie[1] = findViewById(R.id.editTextMovie2);
+        textViewMovie[2] = findViewById(R.id.editTextMovie3);
+        textViewMovieProb[0] = findViewById(R.id.editTextprobablity1);
+        textViewMovieProb[1] = findViewById(R.id.editTextprobablity2);
+        textViewMovieProb[2] = findViewById(R.id.editTextprobablity3);
     }
 
     public void sendQuery(String query) {
@@ -61,7 +66,7 @@ public class ClassificationActivity extends AppCompatActivity {
     }
 
     public void ClassificationQuery(View view){
-        EditText editText = (EditText) findViewById(R.id.editTextQuery);
+        EditText editText = (EditText) findViewById(R.id.editTextquery);
         String message = editText.getText().toString();
         sendQuery(message);
     }

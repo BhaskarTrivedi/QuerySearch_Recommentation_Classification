@@ -1,6 +1,7 @@
 from flask import Flask, request,jsonify
 import CTextSearch as ts
 import CNaiveBayes as nb
+import CRecommendation as cr
 
 
 app = Flask(__name__)
@@ -8,6 +9,7 @@ app = Flask(__name__)
 SearchObj = ts.CTextSearch()
 FileHandlingObj = SearchObj.getFileReadObj()
 naivebObj = nb.CNaivebase()
+RecObj = cr.CRecommendation()
 
 
 @app.route('/')
@@ -46,6 +48,21 @@ def classificationdata():
     return jsonify(ResultData)
 
 
+@app.route('/recommendation/',methods=['POST'])
+def recommendationdata():
+    req_data = request.get_json()
+    print(req_data)
+    if 'Recommendation' in req_data:
+        searchQ = req_data['Recommendation']
+
+    ResultData = Recommendation(searchQ)
+    if ResultData == []:
+        ResultData = {"Movie": ["NA", "NA", "NA", "NA", "NA"]}
+    print("recommendationdata : method :recommendationdata File :DataMiningServer.py")
+    print(ResultData)
+    return jsonify(ResultData)
+
+
 def InitialiseSearchObject():
     print("Initialising search Object")
     SearchObj.Read_and_initialise_document()
@@ -60,6 +77,12 @@ def InitializeClassificationObject():
     naivebObj.CalculateClassProbability()
     print("Classification Initialise")
 
+def InitializeRecommendationSystem():
+    RecObj.Initialize()
+    RecObj.CreateModel()
+    RecObj.CalculateSimilarity()
+    RecObj.Predict()
+
 def SearchQuery(query):
     print("Inside Search Query Server: DataMiningServer.py")
     return SearchObj.Search(query)
@@ -70,9 +93,16 @@ def ClassificationT(query):
     print(PredictedClass)
     return PredictedClass
 
+def Recommendation(query):
+    print("Inside Recommendation Server: DataMiningServer.py")
+    recommendated_data = RecObj.GetPredictedMovie()
+    print(recommendated_data)
+    return recommendated_data
+
 
 InitialiseSearchObject()
 InitializeClassificationObject()
+InitializeRecommendationSystem()
 #SearchQuery("Woody Summoned Tibet happily")
 
 if __name__ == '__main__':

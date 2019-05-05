@@ -37,4 +37,14 @@ public class Home extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void Recommendation(View view){
+        Context context = getApplicationContext();
+        CharSequence text = "Recommendation Selected";
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+        Intent intent = new Intent(this, Recommendation.class);
+        startActivity(intent);
+    }
+
 }

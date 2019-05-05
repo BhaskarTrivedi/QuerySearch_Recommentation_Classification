@@ -5,6 +5,7 @@ from nltk.stem.porter import PorterStemmer
 import pandas as pd
 from collections import defaultdict
 from collections import Counter
+from operator import itemgetter
 
 class CNaivebase():
     def __init__(self):
@@ -80,7 +81,7 @@ class CNaivebase():
         #print(self.ClassF)
         #print(self.ClassTermCount)
         #print(len(self.unique_terms))
-        print(self.TermClassFrequency)
+        #print(self.TermClassFrequency)
 
 
 
@@ -105,23 +106,70 @@ class CNaivebase():
     def CalculateTermProbablity(self,query):
         terms = self.tokenize(query)
         retrive_data = {}
-        probablity = 0
-        className = ''
+        probablity = [0,0,0]
+        className = ['','','']
+        index = [1,1,1]
         for key in self.ClassF:
             #print((self.ClassTermCount[key]))
             currentProb = self.ClassF[key]
             for term in terms:
+                #P(y|x1,x2,…..xn ) = P(x1|y)P(x2|y)..P(xn|y) P(y) /(P(x1)P(x2)…..P(xn)
                 currentProb = currentProb * (( self.TermClassFrequency[term].get(key,0)+1) /( len(self.ClassTermCount[key]) + len( self.unique_terms)))
 
             self.queryClassPrabablity[key] = currentProb
-            print(currentProb)
-            if currentProb > probablity:
-                probablity = currentProb
-                className = key
+            #print(currentProb)
+            min_prob = min(probablity)
+            if currentProb > min_prob:
+                index_min = probablity.index(min_prob)
+                probablity[index_min] = currentProb
+                className[index_min] = key
 
-        retrive_data.update({"Movie":[className]})
-        retrive_data.update({"Prabablity": [probablity]})
+        #probablity.sort(reverse=True)
+        #print(probablity)
+        #print(className)
+        probablity,className = [list(x) for x in zip(*sorted(zip(probablity, className), key=itemgetter(0)))]
+        probablity.reverse()
+        className.reverse()
+
+        retrive_data.update({"Movie":className})
+        retrive_data.update({"Prabablity": probablity})
         return retrive_data
+
+
+    def CalculateTraingAccuracy(self):
+        count=0
+        for index in range(self.totalDocument):
+            current_class = self.MovieData.loc[index, 'Mgenres']
+            if pd.isna(current_class):
+                continue
+            des_query = self.MovieData.loc[index, 'overview']
+            query_result = self.CalculateTermProbablity(des_query)
+            mov_name = query_result['Movie']
+            for mov_index in range(3):
+                if(current_class ==mov_name[mov_index] ):
+                    count = count + 1
+
+            trainingAccuracy = (count / self.totalDocument ) * 100
+        print("Training Accuracy")
+        print(trainingAccuracy)
+
+
+    def CalculateTestAccuracy(self):
+        count=0
+        for index in range(self.totalDocument+1,self.totalDocument+100):
+            current_class = self.MovieData.loc[index, 'Mgenres']
+            if pd.isna(current_class):
+                continue
+            des_query = self.MovieData.loc[index, 'overview']
+            query_result = self.CalculateTermProbablity(des_query)
+            mov_name = query_result['Movie']
+            for mov_index in range(3):
+                if(current_class ==mov_name[mov_index] ):
+                    count = count + 1
+
+            TestAccuracy = (count / self.totalDocument ) * 100
+        print("Test Accuracy")
+        print(TestAccuracy)
 
 
 

@@ -25,9 +25,12 @@ public class ConnectServer {
     //reason for 10.0.2.2 is https://developer.android.com/studio/run/emulator-networking
     SearchResult SearchResultObj;
     ClassificationActivity ClassificationActObj;
+    Recommendation RecommendationObj;
     int Action = 0;
-    //String SearchURL = "http://10.0.2.2:5000/search/";
+    //String Searchurl = "http://10.0.2.2:5000/search/";
     //String classificationURL = "http://10.0.2.2:5000/classification/";
+    //String RecommendationURL = "http://10.0.2.2:5000/recommendation/";
+    String RecommendationURL = "http://bhaskartrivedi.pythonanywhere.com/recommendation/";
     String classificationURL = "http://bhaskartrivedi.pythonanywhere.com/classification/";
     String DomailURL = "http://bhaskartrivedi.pythonanywhere.com/search/";
     String Searchurl = "http://bhaskartrivedi.pythonanywhere.com/search/";
@@ -35,6 +38,7 @@ public class ConnectServer {
     //String SearchURL = "http://stackoverflow.com";
     String SearchData;
     String classificationData;
+    String RecommendationData;
     InputStream searchin;
     String fullresponse;
     private class HTTPAsyncTask extends AsyncTask<String, Void, String> {
@@ -81,6 +85,17 @@ public class ConnectServer {
         new HTTPAsyncTask().execute(DomailURL);
     }
 
+    public void SendRecommendationData(String data,int Act,Recommendation RObj){
+        RecommendationData = data;
+        this.Action = Act;
+        Log.d("Recommendation ", data);
+        if (Action == 2) {
+            DomailURL = RecommendationURL;
+            this.RecommendationObj = RObj;
+        }
+        new HTTPAsyncTask().execute(DomailURL);
+    }
+
 
     private String getResponseFromServer(String targetUrl){
         try {
@@ -96,9 +111,13 @@ public class ConnectServer {
                 //Creating content to sent to server
                 jsonObject = CreateSearchJson();
             }
-            if(Action ==1){
+            else if(Action ==1){
                 //Creating content to sent to server
                 jsonObject = CreateClassificationJson();
+            }
+            else if(Action ==2){
+                //Creating content to sent to server
+                jsonObject = CreateRecommendationJson();
             }
             else {
                 jsonObject = CreateSearchJson();
@@ -137,7 +156,19 @@ public class ConnectServer {
             jsonsearchObject.put("classification",classificationData);
             return jsonsearchObject;
         }catch (JSONException e){
-            Log.d("JCF","Can't format JSON OBject class: Connect servet Method : CreateSearchJson");
+            Log.d("JCF","Can't format JSON OBject class: Connect servet Method : CreateClassificationJson");
+        }
+        return null;
+    }
+
+    private JSONObject CreateRecommendationJson() {
+
+        JSONObject jsonsearchObject = new JSONObject();
+        try{
+            jsonsearchObject.put("Recommendation",RecommendationData);
+            return jsonsearchObject;
+        }catch (JSONException e){
+            Log.d("JCF","Can't format JSON OBject class: Connect servet Method : CreateRecommendationJson");
         }
         return null;
     }
@@ -187,6 +218,9 @@ public class ConnectServer {
             }
             if (Action == 1){
                 ClassificationActObj.ReceivedQueryResult(rcvResponse);
+            }
+            if (Action == 2){
+                RecommendationObj.ReceivedQueryResult(rcvResponse);
             }
         } catch (JSONException e) {
             Log.d("Received Joson Exp", e.toString());

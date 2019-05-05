@@ -1,13 +1,38 @@
 import CFileRead as fr
 import CTextSearch as ts
 from collections import defaultdict
-import CClassification as clf
+import CNaiveBayes as nb
+import CRecommendation as cr
+#import CClassification as clf
 
 
 def TextSearch():
 
+
     SearchObj = ts.CTextSearch()
     FileHandlingObj = SearchObj.getFileReadObj()
+    naivebObj = nb.CNaivebase()
+    naivebObj.setFileReadObj(FileHandlingObj)
+
+    naivebObj.Initialize()
+    naivebObj.CalculateClassProbability()
+    classres = naivebObj.CalculateTermProbablity('gun bomb explode kill gun gun')
+    print(classres)
+    naivebObj.CalculateTraingAccuracy()
+    naivebObj.CalculateTestAccuracy()
+
+    '''
+    RecObj = cr.CRecommendation()
+    RecObj.Initialize()
+    RecObj.CreateModel()
+    RecObj.CalculateSimilarity()
+    RecObj.Predict()
+    retrive_data = RecObj.GetPredictedMovie()
+    print(retrive_data)
+
+    '''
+
+    '''
     ClassObj = clf.CClassification()
     ClassObj.setFileReadObj(FileHandlingObj)
     ClassObj.Initialize()
@@ -18,7 +43,7 @@ def TextSearch():
     print(actual_label)
     PredictedClass = ClassObj.PredictedClass(data,index)
     print(PredictedClass)
-
+    '''
 
 
 

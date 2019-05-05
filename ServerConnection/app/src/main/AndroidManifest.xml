@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ClassificationActivity"></activity>
+        <activity android:name=".Recommendation"></activity>
+        <activity android:name=".ClassificationActivity" />
         <activity android:name=".SearchResult" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".Home" />
