@@ -68,6 +68,50 @@ Server code
 
     CFileRead.py
 	Class CRead : to perform file handling 
+	
+    CNaiveBayes.py
+    	Class CNaivebase : To implement Naive base classification
+	
+	Variable
+	self.FileHandlingObj = ''
+        self.MovieData = []
+        #self.postings = defaultdict(dict)
+        self.ClassF = defaultdict(int) # store classfrequency/ Probablity
+        self.queryClassPrabablity = defaultdict(int)  # store  Probablity of class given term
+        self.ClassTermCount = defaultdict(set)  # to store each class has how may total term
+        self.TermClassFrequency = defaultdict(dict) # to store count of term in each class
+        self.totalDocument = 0
+        self.dict = set()
+        self.length = []
+        self.unique_terms = set([]) # store number of unique term
+        self.probclass = set([])
+	
+	Method
+	def CalculateClassProbability(self) : Calculate  class probablity
+	def CalculateTermProbablity(self,query) : Calculate and apply naive base propablity
+	def CalculateTraingAccuracy(self):  Calculate Training Accuracy
+	def CalculateTestAccuracy(self): Calculate Test Accuracy
+	
+     CRecommendation.py
+     	Class CRecommendation : Create the recommendation engine
+	
+	variable
+	self.usercols :
+        self.userdes :
+        self.ratingcols:
+        self.ratings 
+        self.itemcol
+        self.item 
+        self.totaluser 
+        self.totalmovie 
+        self.item_matrix : create user item matrix
+        self.usersimilarity : store user similarity
+        self.itemsimilarity : store item similarity
+        self.prdiction : store recommendated item prediction
+	
+	Method
+	def CreateModel(self) : Initialize uset item matrix
+	def Predict(self, type='user'): Recommend movie to user
 
 
 Client Side 
@@ -100,22 +144,35 @@ Client Side
 		Method 
 		public void SearchQuery(View view) : Navigate to Search query selection on search action
 		
-![](https://github.com/BhaskarTrivedi/QuerySearch_Recommentation_Classification/blob/master/Img/Home.JPG)
+![](https://github.com/BhaskarTrivedi/QuerySearch_Recommentation_Classification/blob/master/Img/Home.jpg)
  
 
 	class SearchActivity : Created to get Search query from user
 
 		Method 
 		public void SearchQuery(View view) : Get the query from user and called Result GUI
-![](https://github.com/BhaskarTrivedi/QuerySearch_Recommentation_Classification/blob/master/Img/Search_Query.JPG)
+![](https://github.com/BhaskarTrivedi/QuerySearch_Recommentation_Classification/blob/master/Img/Search_Query.jpg)
 	
 	class SearchResult: Created to show search result based on user query.
 
 	Method 
 	public void DisplayQueryResult : Show query result in GUI
 	
-![](https://github.com/BhaskarTrivedi/QuerySearch_Recommentation_Classification/blob/master/Img/Search_Result.JPG)
+![](https://github.com/BhaskarTrivedi/QuerySearch_Recommentation_Classification/blob/master/Img/Search_Result.jpg)
+
+	class ClassificationActivity :  Created to get query class 
 	
+	Method 
+	public void DisplayQueryResult: Show classification result
+	
+![](https://github.com/BhaskarTrivedi/QuerySearch_Recommentation_Classification/blob/master/Img/Classification.JPG)
+
+	class Recommendation :  Created to recommended movie to the user
+	
+	Method
+	public void DisplayQueryResult : Show recommendation result to GUI
+
+![](https://github.com/BhaskarTrivedi/QuerySearch_Recommentation_Classification/blob/master/Img/Recommendation.jpg)
 
 Environment
 
@@ -131,7 +188,8 @@ Environment
 Reference:
 
 https://github.com/mnielsen/VSM/blob/master/vsm.py</br>
-http://blog.josephwilk.net/projects/building-a-vector-space-search-engine-in-python.html
+http://blog.josephwilk.net/projects/building-a-vector-space-search-engine-in-python.html<br/>
+https://www.analyticsvidhya.com/blog/2018/06/comprehensive-guide-recommendation-engine-python/<br/>
 
 Credit
 
